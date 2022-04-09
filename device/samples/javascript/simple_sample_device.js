@@ -45,6 +45,8 @@ function generateMessage () {
   const humidity = 60 + (Math.random() * 20); // range: [60, 80]
   const data = JSON.stringify({ deviceId: 'myFirstDevice', windSpeed: windSpeed, temperature: temperature, humidity: humidity });
   const message = new Message(data);
+  message.contentType = 'application/json';
+  message.contentEncoding = 'utf-8';
   message.properties.add('temperatureAlert', (temperature > 28) ? 'true' : 'false');
   return message;
 }
