@@ -26,7 +26,7 @@ const symmetricKey = process.env.IOTHUB_DEVICE_DPS_DEVICE_KEY;
 const useDps = process.env.IOTHUB_DEVICE_SECURITY_TYPE || "connectionString";
 
 const modelIdObject = { modelId: 'dtmi:com:example:Thermostat;1' };
-const telemetrySendInterval = 10000;
+const telemetrySendInterval = 30000;
 const deviceSerialNum = '123abc';
 
 class TemperatureSensor {
@@ -218,7 +218,7 @@ async function main() {
     console.log('Enabling the commands on the client');
     client.onDeviceMethod(commandMaxMinReport, commandHandler);
 
-    // Send Telemetry every 10 secs
+    // Send Telemetry every telemetrySendInterval millisecs
     let index = 0;
     intervalToken = setInterval(() => {
       sendTelemetry(client, index).catch((err) => console.log('error', err.toString()));
